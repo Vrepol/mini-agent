@@ -13,7 +13,7 @@
 
 1. [完整教学目录](docs/COURSE.md)：固定的 12 章学习路线及每章目标。
 2. [当前学习状态](docs/PROGRESS.md)：学到哪里、哪些代码已经实现、后续从哪里继续。
-3. [新对话续讲指南](docs/NEW_CHAT_PROMPT.md)：复制到新的 ChatGPT 对话中，快速恢复课程上下文。
+3. [新对话续讲指南](docs/RESUME.md)：复制到新的 ChatGPT 对话中，快速恢复课程上下文。
 
 ## 目标架构（逻辑抽象，非 Codex / Claude Code 逐模块复刻）
 
