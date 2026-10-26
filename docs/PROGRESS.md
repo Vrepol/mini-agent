@@ -30,7 +30,7 @@
 
 ## 下一步课程
 
-第 03 章 Context Engineering：为什么 \`Session.messages\` ≠ 模型真正需要的 Context？设计 ContextBuilder，逐步实现消息选择、Prompt 规则和长上下文管理。第 04 章再增加厂商特定的 Tool Call 协议 Adapter。
+第 03 章 Context Engineering：为什么 `Session.messages` ≠ 模型真正需要的 Context？设计 ContextBuilder，逐步实现消息选择、Prompt 规则和长上下文管理。第 04 章再增加厂商特定的 Tool Call 协议 Adapter。
 
 ## 跨会话学习说明
 
