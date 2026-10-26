@@ -23,8 +23,10 @@ class WorkspaceTools:
         target = (self.root / path).resolve()
         if not target.is_relative_to(self.root):
             raise ValueError("Path escapes workspace")
-        if ".git" in target.relative_to(self.root).parts:
-            raise ValueError("Editing Git internals is not allowed")
+        parts = target.relative_to(self.root).parts
+        blocked = {".git", ".sessions", ".venv", "__pycache__"}
+        if any(p in blocked or p == ".env" or p.startswith(".env.") for p in parts):
+            raise ValueError("Protected workspace path")
         return target
 
     def definitions(self) -> list[dict]:
@@ -112,7 +114,7 @@ class WorkspaceTools:
             )
             for filename in sorted(filenames):
                 path = Path(parent) / filename
-                if not path.is_symlink():
+                if not path.is_symlink() and not (filename == ".env" or filename.startswith(".env.")):
                     paths.append(path.relative_to(self.root).as_posix())
                     if len(paths) >= 100:
                         return "\n".join(paths) + "\n... (truncated)"
