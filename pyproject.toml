@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mini-agent-lab"
+version = "0.1.0"
+description = "A learning-by-building minimal coding agent"
+requires-python = ">=3.11"
+dependencies = [
+    "openai>=1.50,<3",
+    "python-dotenv>=1.0,<2",
+]
+
+[project.scripts]
+mini-agent = "mini_agent.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["mini_agent*"]

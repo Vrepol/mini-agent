@@ -1,43 +1,37 @@
 # 学习进度与代码状态（持续维护）
 
-## 当前定位
+更新于：2026-10-26
 
-- **理论学习**：第 01 章 Agent Loop 和第 02 章 Session & State 已完成。
-- **下一章**：03. Context Engineering。
-- **代码仓库**：2026-10-23 初始化教学文档；Mini Agent 可运行代码尚未提交，不能声称已通过真实模型 API 验证。
-- **贯穿项目**：用 Python 构建 Mini Codex；DeepSeek API 默认运行；Claude Opus / OpenAI Responses 的模型 Adapter 为教学对照；私密密钥仅使用本地 .env。
+## 理论进度
 
-## 已理解的重要结论
+- [x] 第 01 章 Agent Loop：为什么需要 Harness、Tool Call 如何驱动循环。
+- [x] 第 02 章 Session & State：Session、Turn、Execution State、Environment State 和恢复风险。
+- [ ] 第 03 章 Context Engineering：**下一章**。
+- [ ] 第 04–12 章：按 [COURSE.md](COURSE.md) 依次推进。
 
-### 第 01 章 Agent Loop
-- LLM 生成文本或结构化 Tool Call，不直接执行本地动作。
-- Harness 驱动“请求模型 → 解释响应 → 执行工具 → 回填结果 → 再请求模型”循环。
-- Agent 最小循环要区分 final、tool_call、失败和步骤上限。
+## Mini Agent 实现进度
 
-### 第 02 章 Session & State
-- Session / Thread 代表持续会话；一个 Turn 可包含多次模型 Step 和工具调用。
-- Conversation State、Execution State、Environment State 是三种不同的状态；记录工具成功 ≠ 外部世界必然保持原样。
-- JsonSessionStore 可以用于理解持久化，但不是生产级数据库 / 事务恢复。
-- 工具执行后的崩溃可能让操作处于 Unknown；不能无脑重放有副作用的工具。
-- DIY：`/sessions` 和 `/resume`；中断工具调用提示。
+- [x] Python 包结构和 DeepSeek 模型适配器（当前仅 Chat Completions 非思考模式）。
+- [x] AgentRuntime：逐轮模型推理、工具调用、工具反馈、最终回答与步骤上限。
+- [x] Session + JsonSessionStore：会话 UUID、消息历史、状态、pending_tool_calls、磁盘持久化。
+- [x] CLI：/sessions、/resume、/new、/exit，以及工作区、步数和文件写入参数。
+- [x] WorkspaceTools：列出文件、读文件、显式授权后写文件、预设 unittest 命令。
+- [x] ScriptedModel 离线测试和有 Bug 的 Calculator 工作区。
+- [ ] ContextBuilder 和 Compaction（第 03 章）。
+- [ ] Anthropic Messages / OpenAI Responses 适配器（第 04 章）。
+- [ ] 生产级沙箱、权限系统、幂等恢复、Tracing、多 Agent（第 05–11 章）。
 
-## 尚未完成的实现
+## 验证等级（务必区分）
 
-- [ ] Mini Agent Python 包与项目配置
-- [ ] Agent Loop 最小可运行版本
-- [ ] Session/State & JsonSessionStore
-- [ ] DeepSeek ModelAdapter 与本地 .env.example
-- [ ] Tool Registry 与安全的基础工具
-- [ ] 单元测试、示例工作区及运行指南
-- [ ] Anthropic / OpenAI Adapter 对照
-- [ ] 其余各章模块
+- **代码提交**：GitHub 中已有完整代码、示例、离线单元测试及 CI 工作流。
+- **离线单元测试**：由 GitHub Actions 执行；查看 Actions 页面确认每次提交是否通过。
+- **DeepSeek 真实 API**：未使用用户密钥验证；需用户在本地填写 .env 并实际运行。
+- **恢复边界**：pending 工具调用只标记风险并阻止自动重放，不提供自动调和；JSON 文件不保证事务恢复。
 
-## 下一章（03）要回答
+## 下一步课程
 
-**Session 存储的信息不等于给模型发送的上下文。Context Builder 如何决定每次模型看到什么？** 由此展开消息历史、指令层、工具结果、上下文预算与压缩策略；保持同一个登录 Bug 示例。
+第 03 章 Context Engineering：为什么 \`Session.messages\` ≠ 模型真正需要的 Context？设计 ContextBuilder，逐步实现消息选择、Prompt 规则和长上下文管理。第 04 章再增加厂商特定的 Tool Call 协议 Adapter。
 
-## 继续教学的约束
+## 跨会话学习说明
 
-- 不跳章。用户明确要求旁支讨论的例外，只答当下议题，不视为课程推进。
-- 每次解释都包含原理、模块接口、抽象代码、真实案例、DIY。
-- 代码提交以后再把对应任务勾选；以 GitHub 中可检查到的内容为准。
+新会话首先阅读 README.md、docs/COURSE.md、docs/PROGRESS.md、docs/RESUME.md；从标记的下一章继续。聊天中的额外技术讨论不自动改变章节进度；代码实现与理论进度单独维护。

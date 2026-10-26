@@ -2,12 +2,10 @@
 
 项目：https://github.com/Vrepol/mini-agent
 
-继续学习时，参考 README.md、docs/COURSE.md、docs/PROGRESS.md 三份文件。
+新聊天中可以直接发送：
 
-课程共 12 章，每章按第一性原理、抽象设计、伪代码与运行过程、Codex/Claude Code 对照、Mini Agent 增量实践和 DIY 的顺序讲解。
+> 我们在从第一性原理学习 Codex / Claude Code 式 Coding Agent，并在 GitHub 仓库 https://github.com/Vrepol/mini-agent 中逐章构建 Mini Agent。请先读取 README.md、docs/COURSE.md、docs/PROGRESS.md；遵守固定的 12 章目录和现有进度，不要跳章。每章按第一性原理 → 模块职责 → 伪代码与运行轨迹 → Codex/CC 对照 → 可运行增量代码与 DIY 讲解。默认 Python + DeepSeek API；Claude Opus / OpenAI Responses 的适配留到第 04 章。请分清理论讲过、代码提交、离线测试和真实 API 验证，开始 PROGRESS.md 标明的下一章。
 
-截至 2026-10-23：第 01 章 Agent Loop 与第 02 章 Session & State 已完成理论讲解；第 03 章 Context Engineering 待开始。当前仓库仅包含教学文档，Mini Agent 尚无可运行代码。
+已完成理论：01 Agent Loop、02 Session & State。当前应学习：03 Context Engineering。
 
-实际模型：DeepSeek；模型接口按 Adapter 设计，对比 Anthropic Messages 与 OpenAI Responses。不要将 API Key 提交到 GitHub。
-
-新会话可提供此仓库链接并说明：请根据课程目录和进度文件从下一章继续，旁支讨论不视为课程进度推进。
+当前仓库已有第 01、02 章的最小代码（见 README）；第 03 章尚未实现。Token/密钥仅放本地 .env，勿上传 GitHub。
